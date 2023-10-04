@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>omnitrix_creation</title>
+    <script>
+       function hov() {
+        let button = document.getElementsByClassName("display");
+        var audio1 = new Audio('/audio/albido_load.mp3');
+        var audio2 = new Audio('/audio/albido_twist.mp3');
+        var audio3 = new Audio('/audio/albido_change.mp3');
+        var audio4 = new Audio('/audio/albido_ultimate.mp3');
+        var element = document.getElementById("display");
+
+
+        element.style.filter = "drop-shadow(4px 9px 60px red)";
+        
+        let clickCount = 0;
+
+        
+    
+        if (localStorage.getItem("clickCount")) 
+        {
+            clickCount = parseInt(localStorage.getItem("clickCount"));
+            
+        }
+    
+            clickCount++; // Increment the clickCount after retrieving from localStorage
+    
+            localStorage.setItem("clickCount", clickCount); // Store the updated clickCount in localStorage
+    
+            console.log(clickCount);
+        //Audio Control
+        if(clickCount==1)
+            audio1.play();
+        else if (clickCount==2)
+            audio2.play();
+        else if(clickCount==3)
+            audio3.play();
+        else if(clickCount==4)
+            audio4.play();
+        else
+            {
+                audio3.play();
+                localStorage.clear();
+                var initialBlurRadius = 60; // Initial blur radius
+                var interval = 5; // Interval in milliseconds
+                var blurRadiusStep = 2; // Amount to decrease blur radius each interval
+
+        // Function to gradually decrease the blur radius
+        function decreaseBlurRadius() {
+            if (initialBlurRadius > 0) {
+                initialBlurRadius -= blurRadiusStep;
+                element.style.filter = `drop-shadow(red 4px 9px ${initialBlurRadius}px )`;
+                
+            } else {
+                clearInterval(intervalId); // Stop the interval when the effect is removed
+            }
+        }
+
+        // Start the interval to gradually decrease the blur radius
+        var intervalId = setInterval(decreaseBlurRadius, interval);
+            }
+    
+
+}
+
+    </script>
+</head>
+<body >
+        
+        <div class="bracelet">
+            <div class="watch">
+                <button id="display" onclick="hov() "></button>
+            </div>
+            <img src="img/ALBIDO.png">
+        </div>
+
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+         }
+
+        body{
+                background:black;
+            }
+        .bracelet{
+                    width: 89%;
+                    display: flex;
+                    justify-content: center;
+                }
+        img{
+                    
+                height: 70%;
+                width: 60%;
+                background-image: fit-content;
+            }
+        .watch{ 
+                
+                align-content: center;
+                width: 377px;
+                height: 377px;
+                background:rgb(255, 255, 255);
+                position: absolute;
+                left:33%;
+                top:25%;
+                z-index: 10;
+                border-radius: 50%;
+                background-size: cover;
+                display: flex;
+                
+               }
+                #display{   
+                    
+                        
+                        background: rgb(252, 2, 65);
+                        border: 189px solid black;
+                        border-radius:50%;
+                        border-bottom-color: transparent;
+                        border-top-color: transparent;
+                    }
+                /* #display:hover{
+                    filter: drop-shadow(4px 9px 60px red);
+                    background:rgb(255, 0, 0);
+                    border: 189px solid rgb(0, 0, 0);
+                    border-radius:50%;
+                    border-bottom-color: transparent;
+                    border-top-color: transparent;
+
+                } */
+    </style>    
+</body>
+</html>
